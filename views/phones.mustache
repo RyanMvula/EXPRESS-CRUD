@@ -9,40 +9,53 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-center mb-4 mt-2">
-            <h1> LIST OF PHONES </h1>
+
+        <div class="row mt-3 mb-1 text-center">
+            <div class="col-md-12">
+                <h1> LIST OF PHONES </h1>
+            </div>
         </div>
     
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Count</th>
-                <th>Brand</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#rows}}
-            <tr>
-                <td>{{name}}</td>
-                <td>{{count}}</td>
-                <td>{{brand}}</td>
-                <td>
-                    <a class="btn btn-success btn-md" href="/phones/edit/{{pid}}">Edit</a>
-                </td>
-                <td>
-                    <form action="/phones/delete/{{pid}}" method="POST">
-                        <button class="btn btn-danger btn-md" type="submit">Delete</button>
-                    </form>
-                </td>
-                
-            </tr>
-            {{/rows}}
-        </tbody>
-    </table>
-    <a href="/add">Add Phone</a>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-hover table-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">NAME</th>
+                                <th scope="col">COUNT</th>
+                                <th score="col">BRAND</th>
+                                <th score="col">EDIT</th>
+                                <th score="col">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#rows}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{count}}</td>
+                                <td>{{brand}}</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" href="/phones/edit/{{pid}}">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="/phones/delete/{{pid}}" method="POST">
+                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                    
+                            </tr>
+                            {{/rows}}
+                        </tbody>
+                </table>
 
-</div>
+            </div>
+        
+        </div>
+
+      <a class="btn btn-warning btn-md" href="/add">Add Phone</a>
+
+    </div>
+
 </body>
 
  <!-- JavaScript Bundle with Popper -->

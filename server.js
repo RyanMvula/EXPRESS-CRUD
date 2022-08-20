@@ -1,6 +1,6 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
-const {Client} = require('pg')
+const {Client} = require('pg');
 
 const app = express();
 const mustache = mustacheExpress();
@@ -17,7 +17,7 @@ app.get('/',(req,res)=>{
 });
 
 //Display items
-app.get('/home',(req,res)=>{
+app.get('/inventory',(req,res)=>{
 
     const client = new Client({
         host: 'localhost',
@@ -130,8 +130,27 @@ app.post('/phones/edit/:id',(req,res)=>{
     .then((results)=>{
         res.redirect('/home');
     });
-})
+});
 
-app.listen(8000,(req,res)=>{
+//dashboard
+app.get('/dashboard',(req,res)=>{
+    const client = new Client({
+        user: 'ryan',
+        host: 'localhost',
+        database: 'mobilestore',
+        password: 'password',
+        port: 5432
+    });
+
+    client.connect().then(()=>{
+        return client.query('SELECT SUM(count) FROM phones; SELECT DISTINCT COUNT(brand) FROM phones');
+    }).then((results)=>{
+        console.log(results[0]);
+        console.log(results[1]);
+        res.render('dashboard', {n1: results[0].rows, n2: results[1].rows});
+    })
+});
+
+app.listen(8000,()=>{
     console.log("server is running");
 }); 
